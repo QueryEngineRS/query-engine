@@ -1,0 +1,30 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package org.wumbo.queryengine.grpc;
+
+enum Anchor {
+  TOP_LEFT = 0;
+  CENTER = 1;
+}
+
+message QueryCoordinatesRequest {
+  int32 object_id = 1;
+  Anchor position = 2;
+}
+
+message QueryCoordinatesRandomRequest {
+  int32 object_id = 1;
+
+  // If you want the same random coordinate of the object, then pass in the same seed
+  int64 seed = 2;
+}
+
+message QueryCoordinatesResponse {
+  int32 x = 1;
+  int32 y = 2;
+}
+
+service QueryEngineService {
+  rpc QueryCoordinates(QueryCoordinatesRequest) returns (QueryCoordinatesResponse);
+  rpc QueryCoordinatesRandom(QueryCoordinatesRandomRequest) returns (QueryCoordinatesResponse);
+}
