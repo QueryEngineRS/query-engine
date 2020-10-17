@@ -3,6 +3,7 @@ package com.wumbo.queryengine;
 import io.grpc.Server;
 import io.grpc.ServerInterceptors;
 import io.grpc.netty.NettyServerBuilder;
+import io.grpc.protobuf.services.ProtoReflectionService;
 
 import io.grpc.stub.StreamObserver;
 import net.runelite.api.Client;
@@ -19,8 +20,8 @@ import java.net.InetSocketAddress;
 @Slf4j
 public class QueryEngineServer {
     private Server server;
-    final String host = "";
-    final int port = 0;
+    final String host = "0.0.0.0";
+    final int port = 9090;
 
     private final QueryEnginePlugin plugin;
     private final QueryEngineConfig config;
@@ -36,6 +37,7 @@ public class QueryEngineServer {
     public void start() throws IOException {
         server = NettyServerBuilder.forAddress(new InetSocketAddress(host, port))
                         .addService(new QueryEngineServiceImpl(this.client, this.plugin))
+                        .addService(ProtoReflectionService.newInstance())
                         .build()
                         .start();
 

@@ -47,7 +47,7 @@ open class BootstrapTask : DefaultTask() {
             project.subprojects.forEach {
                 if (it.project.properties.containsKey("PluginName") && it.project.properties.containsKey("PluginDescription")) {
                     var pluginAdded = false
-                    val plugin = it.project.tasks["jar"].outputs.files.singleFile
+                    val plugin = it.project.tasks["shadowJar"].outputs.files.singleFile
 
                     val releases = ArrayList<JsonBuilder>()
 

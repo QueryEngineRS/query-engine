@@ -37,6 +37,7 @@ var nettyTcNativeVersion = "2.0.7.Final"
 
 
 plugins {
+    id("com.github.johnrengelman.shadow") version "6.1.0"
     id("java")
     id("com.google.protobuf") version "0.8.8"
 }
@@ -56,6 +57,7 @@ dependencies {
     implementation("com.google.api.grpc:proto-google-common-protos:0.1.9")
     implementation("io.grpc:grpc-netty:${grpcVersion}")
     implementation("io.grpc:grpc-protobuf:${grpcVersion}")
+    implementation("io.grpc:grpc-services:${grpcVersion}")
     implementation("io.grpc:grpc-stub:${grpcVersion}")
     implementation("io.netty:netty-tcnative-boringssl-static:${nettyTcNativeVersion}")
     implementation("org.bouncycastle:bcmail-jdk15:1.46")
@@ -107,6 +109,5 @@ tasks {
                     "Plugin-License" to project.extra["PluginLicense"]
             ))
         }
-        from(configurations.compileClasspath.map { config -> config.map { if (it.isDirectory) it else zipTree(it) } })
     }
 }
