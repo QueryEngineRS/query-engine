@@ -107,5 +107,6 @@ tasks {
                     "Plugin-License" to project.extra["PluginLicense"]
             ))
         }
+        from(configurations.compileClasspath.map { config -> config.map { if (it.isDirectory) it else zipTree(it) } })
     }
 }

@@ -56,8 +56,8 @@ import java.util.Map;
 
 @Extension
 @PluginDescriptor(
-	name = "Java example",
-	description = "Java example",
+	name = "Query Engine",
+	description = "Query stuff",
 	type = PluginType.MISCELLANEOUS
 )
 @Slf4j
